@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Track Fault Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Railway Track Fault Detection</h1>
+            <p>Upload an image to detect potential railway track defects</p>
+        </header>
+
+        <nav class="google-tabs">
+            <button class="tab-btn active" id="upload-tab">UPLOAD</button>
+            <button class="tab-btn" id="realtime-tab">REAL-TIME</button>
+        </nav>
+
+        <div class="card" id="upload-card">
+            <form id="upload-form">
+                <div class="upload-area" id="drop-area">
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="#4285f4">
+                            <path
+                                d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p>Select image or drag and drop</p>
+                    <input type="file" id="file-input" name="file" accept="image/*" style="display: none;">
+                    <button type="button" class="btn-primary"
+                        onclick="document.getElementById('file-input').click()">CHOOSE FILE</button>
+                </div>
+            </form>
+
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing track image...</p>
+            </div>
+
+            <div id="result-container" class="hidden">
+                <div class="preview">
+                    <img id="image-preview" src="" alt="Selected Image">
+                </div>
+                <div class="result-details">
+                    <h2 id="result-text"></h2>
+                    <p id="accuracy-text"></p>
+                    <button class="btn-secondary" onclick="resetForm()">TRY ANOTHER</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hidden" id="realtime-card">
+            <div class="video-container">
+                <video id="webcam" autoplay playsinline width="100%"></video>
+                <div id="status-badge">Real-time Analysis</div>
+            </div>
+            <div id="realtime-result-text">Waiting for stream...</div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

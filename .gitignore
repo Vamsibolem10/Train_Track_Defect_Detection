@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Models & Data
+*.h5
+*.keras
+uploads/
+# Railway Track fault Detection Updated/ (Removed as per user request)
+*dataset*
+
+# IDEs
+.vscode/
+.idea/
