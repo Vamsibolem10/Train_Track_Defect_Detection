@@ -9,10 +9,10 @@ from tensorflow.keras import layers, models, Model
 from tensorflow.keras.optimizers import Adam
 
 # 1. Dataset Configuration
-# These paths are relative to the execution directory. 
-# They assume the dataset folder is present in the same directory.
-train_dir = 'Railway Track fault Detection Updated/Train'
-validation_dir = 'Railway Track fault Detection Updated/Validation'
+# Get the root directory (one level up from this script's directory)
+base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+train_dir = os.path.join(base_path, 'Railway Track fault Detection Updated', 'Train')
+validation_dir = os.path.join(base_path, 'Railway Track fault Detection Updated', 'Validation')
 
 def check_dirs():
     if not os.path.exists(train_dir) or not os.path.exists(validation_dir):
@@ -82,7 +82,8 @@ if __name__ == "__main__":
         # 5. Callbacks for "Run Once" Robustness
         # EarlyStopping prevents wasting time, ModelCheckpoint saves the "Best"
         early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
-        checkpoint = ModelCheckpoint('mymodel.h5', monitor='val_accuracy', save_best_only=True, mode='max')
+        model_save_path = os.path.join(os.path.dirname(__file__), 'mymodel.h5')
+        checkpoint = ModelCheckpoint(model_save_path, monitor='val_accuracy', save_best_only=True, mode='max')
 
         # 5. Training
         print("Starting training with EarlyStopping for maximum robustness...")
@@ -95,8 +96,8 @@ if __name__ == "__main__":
         )
 
         # 6. Save the Model
-        model.save('mymodel.h5')
-        print('Model training complete and saved as mymodel.h5')
+        model.save(model_save_path)
+        print(f'Model training complete and saved as {model_save_path}')
 
         # 7. Performance Visualization
         acc = history.history['accuracy']
