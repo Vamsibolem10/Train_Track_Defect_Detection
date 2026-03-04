@@ -11,7 +11,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-MODEL_PATH = 'mymodel.h5'
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'Model', 'mymodel.h5')
 model = None
 
 def get_model():
