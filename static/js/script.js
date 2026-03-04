@@ -81,7 +81,7 @@ async function processRealtimeFrames() {
         const data = await response.json();
 
         if (data.result) {
-            rtResult.innerText = `Detected: ${data.result} (${data.confidence})`;
+            rtResult.innerText = `Detected: ${data.result}`;
             rtResult.style.color = data.result === 'Defective' ? '#db4437' : '#0f9d58';
         }
     } catch (err) {
@@ -151,7 +151,7 @@ async function handleUpload(file) {
         } else {
             resultText.innerText = `Result: ${data.result}`;
             resultText.style.color = data.result === 'Defective' ? '#db4437' : '#0f9d58';
-            accuracyText.innerText = `Confidence: ${data.confidence}`;
+            accuracyText.innerText = ``;
         }
     } catch (error) {
         loading.classList.add('hidden');
